@@ -37,7 +37,6 @@
 - **GCC 8+** (Supports C++17)
 - **CMake 3.10+**
 - **GSL** (GNU Scientific Library)
-- **xtensor** (C++ tensors library)
 - **Python 3.8+**
 
 ### Installing
