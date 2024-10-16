@@ -67,7 +67,7 @@ pip3 install -r requirements.txt
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/xxxxxx/ziji.git
+   git clone https://github.com/ABHModels/ziji.git
    cd ziji
    ```
 
