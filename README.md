@@ -82,7 +82,7 @@ pip3 install -r requirements.txt
    make cmake_clean
    chmod +x lib/reflector_linux
    ```
-
+*NOTE:* `ziji` requires a reflection model to work, place the binary of your reflection model in `lib` directory and replace `lib/reflector_linux` in the last command with yours.
 
 ## Usage
 
