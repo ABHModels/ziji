@@ -21,7 +21,7 @@
 
 References:    
 
-[1] _Toward More Accurate Synthetic Reflection Spectra: Improving the Calculations of Returning Radiation_, Mirzaev et al., [Astrophys.J. 965 (2024](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b)
+[1] _Toward More Accurate Synthetic Reflection Spectra: Improving the Calculations of Returning Radiation_, Mirzaev et al., [Astrophys.J. 965 (2024](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b)    
 [2] _ZIJI: a model to calculate X-ray spectra of black hole X-ray binaries_, Mirzaev et al., [2406.01226](https://arxiv.org/abs/2406.01226)).
 
 
