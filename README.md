@@ -17,7 +17,7 @@
 
 ## Project Overview
 
-`ziji` simulates the X-ray spectra of black hole X-ray binaries, incorporating the effects of returning radiation. It uses a disk+corona model, considering both thermal disk and reflection components. The model assumes a lamppost corona in Kerr spacetime and improves upon previous calculations by self-consistently determining the ionization parameter at each radial coordinate of the disk, resulting in more realistic reflection spectra (Temurbek et al., 2024, [link](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b); Temurbek et al., 2024, [link](https://arxiv.org/abs/2406.01226)).
+`ziji` simulates the X-ray spectra of black hole X-ray binaries, incorporating the effects of returning radiation. It uses a disk+corona model, considering both thermal disk and reflection components. The model assumes a lamppost corona in Kerr spacetime and improves upon previous calculations by self-consistently determining the ionization parameter at each radial coordinate of the disk, resulting in more realistic reflection spectra (Mirzaev et al., 2024, [link](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b); Mirzaev et al., 2024, [link](https://arxiv.org/abs/2406.01226)).
 
 
 ## Features
@@ -163,5 +163,4 @@ Contributions are welcome!
 ## Acknowledgements
 
 *(this section empty for now)*
-
 

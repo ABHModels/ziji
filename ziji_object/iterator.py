@@ -76,7 +76,7 @@ class Iterator:
         flux_return_inner = FluxFromSpectra(self.returning_black[-1, :], self.ENERGYS)
         flux_inner = lampost_corona.Fx_inner + flux_return_inner
         Xi_inner = IonazationFromFlux(
-            flux_inner, self.ziji_params.accretion_disk.density
+            flux_inner, self.ziji_params.accretion_disk.density_profile[-1]
         )
         self.ziji_params.accretion_disk.ionization = Xi_inner
 

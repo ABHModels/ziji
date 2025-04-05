@@ -116,18 +116,18 @@ class Reflector:
             En, c_E_F_E = np.loadtxt(
                 "data/data_cache/reflionx/out_spec/r%d.txt" % i, unpack=True
             )
-            c_F_E = c_E_F_E / En
-            erg = 1
-            keV = erg / 624150647.99632
-            Fx = cumtrapz(c_F_E, En, initial=0)[-1] * keV
-            if self.mode == 1:
-                Xi = 4 * np.pi * Fx / self.ne_density_arr[i]
-                self.spec_reflections[i, :] = c_F_E * self.ionazation_arr[i]/Xi
-            elif self.mode == 0:
-                Xi = 4 * np.pi * Fx / self.ne_density_arr
-                self.spec_reflections[i, :] = c_F_E * self.ionazation_arr/Xi
+            # c_F_E = c_E_F_E / En
+            # erg = 1
+            # keV = erg / 624150647.99632
+            # Fx = cumtrapz(c_F_E, En, initial=0)[-1] * keV
+            # if self.mode == 1:
+            #     Xi = 4 * np.pi * Fx / self.ne_density_arr[i]
+            #     self.spec_reflections[i, :] = c_F_E * self.ionazation_arr[i]/Xi
+            # elif self.mode == 0:
+            #     Xi = 4 * np.pi * Fx / self.ne_density_arr
+            #     self.spec_reflections[i, :] = c_F_E * self.ionazation_arr/Xi
 
-            # self.spec_reflections[i, :] = self.emis_prof_eff[i] * 10**20 * c_E_F_E / En
+            self.spec_reflections[i, :] = self.emis_prof_eff[i] * 10**20 * c_E_F_E / En
 
     def _CreatInputScript(self, n_irradiators):
         Xi = self.ionazation_arr

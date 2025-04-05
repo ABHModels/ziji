@@ -179,6 +179,37 @@ double RedshiftDisk_Disk(double re, double ro, double impact_par,
   return kuo / kue;
 }
 
+double
+EmissionAngleDisk_Screen(double re, double k_th, double impact_par,
+                         const ziji::astro_objects::BlackHole &blackHoleObj) {
+  double Omega_var, denom;
+  double m[4][4], dmdr[4][4], dmdr2[4][4];
+
+  // Create a Metric object using the BlackHole object
+  ziji::GR::Metric metric(blackHoleObj);
+
+  // Compute the metric and its derivatives at r = re, theta = π/2
+  metric.computeMetricDerivatives(re, M_PI / 2.0, m, dmdr, dmdr2);
+
+  // Compute angular velocity (Omega_var)
+  Omega_var =
+      (-dmdr[0][3] + sqrt(dmdr[0][3] * dmdr[0][3] - dmdr[0][0] * dmdr[3][3])) /
+      dmdr[3][3];
+
+  // Compute denominator for the redshift calculation
+  denom = sqrt(
+      -(m[0][0] + 2.0 * m[0][3] * Omega_var + m[3][3] * Omega_var * Omega_var));
+
+  // redshift factor
+  double g = denom / (1.0 - impact_par * Omega_var);
+
+  // cos(theta_emis)
+  double cosem = g * sqrt(m[2][2]) * k_th / 1.;
+
+  return fabs(cosem);
+  ;
+}
+
 } // namespace relativity
 
 } // namespace physics

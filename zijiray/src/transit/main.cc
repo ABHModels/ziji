@@ -23,7 +23,7 @@ using namespace xt;
 #include "objects/observer.h"
 
 ziji::astro_objects::BlackHole black_hole(0., 10.);
-ziji::astro_objects::AccretionDiskGeometry disk_geom(1.0, 500.0);
+ziji::astro_objects::AccretionDiskGeometry disk_geom(1.0, 400.0);
 
 ziji::Observer observer;
 
@@ -39,7 +39,7 @@ int main() { return 0; }
 
 void initGlobals(double spin, double incang) {
   observer.inclination = M_PI * incang / 180.;
-  observer.distance = 10000.;
+  observer.distance = 1.0e+6;
 
   black_hole.init(spin, 10.);
 
@@ -63,6 +63,7 @@ extern "C" void RadiRedshArray(double spin, double incang, wchar_t *fname,
   int Narry = Xshape(0);
   int Narrx = Xshape(1);
   xt::xarray<double> RadRed = xt::zeros<double>({Narry, Narrx, 2});
+  // xt::xarray<double> RadRed = xt::zeros<double>({Narry, Narrx, 4}); // temp
 
   double remis;
 
@@ -82,12 +83,15 @@ extern "C" void RadiRedshArray(double spin, double incang, wchar_t *fname,
 
       remis = rayGen.vars[0];
 
-      if ((remis > disk_geom.inner_radius &&
-           remis < disk_geom.outer_radius + 1.0e-4)) {
+      if ((remis > disk_geom.inner_radius * (1. - 2 * 1.0e-7) &&
+           remis < disk_geom.outer_radius * (1. + 2 * 1.0e-7))) {
         RadRed(i, j, 0) = remis;
         RadRed(i, j, 1) =
             RedshiftDisk_Screen(remis, rayGen.impact_par, black_hole);
 
+        // RadRed(i, j, 2) = EmissionAngleDisk_Screen(
+        //     remis, rayGen.vars[3], rayGen.impact_par, black_hole);
+        // RadRed(i, j, 3) = rayGen.vars[4]; // temp phi
         // printf("%f %f %d %d %f %f \n",Flux(i,j),remis, i,j, Xsc(i,j),
         // Ysc(i,j));
       }
@@ -127,11 +131,11 @@ extern "C" void rdiskLineScr(int nr_zone, double spin, double incang,
   else
     remis = disk_geom.outer_radius;
 
-  double rem0 = remis * cos(observer.inclination);
+  double rem0 = remis;
   double rem1 = rem0 * 1.1;
 
   if (remis < 5. * black_hole.Horizon()) {
-    rem0 = 2 * remis * cos(observer.inclination);
+    rem0 = 2 * remis;
     rem1 = rem0 * 2;
   }
 
@@ -144,14 +148,17 @@ extern "C" void rdiskLineScr(int nr_zone, double spin, double incang,
     params[0] = phsc(i);
     params[1] = remis;
 
-    rscr_Sol = scMethod(FuncRadiEm, params, rem0, rem1, err_radi, 400);
+    rscr_Sol = scMethod_singul(FuncRadiEm, params, rem0, rem1, err_radi, 400);
 
-    if (rscr_Sol < 0) {
+    if (rscr_Sol < 0 || isnan(rscr_Sol)) {
       printf("No %d:  rscr = %f;  phsc = %f;  rem=  %f; \n", i, rscr_Sol,
              params[0], remis);
     }
-    rem0 = rscr_Sol;
-    rem1 = rscr_Sol + rscr_Sol * err_radi * 100.;
+
+    rem0 = rscr_Sol * (1. + 1.0e-2) + 0.1;
+    rem1 = rem0 * (1. + 1.0e-3);
+    // rem0 = rscr_Sol;
+    // rem1 = rscr_Sol + rscr_Sol * err_radi * 100.;
     Rscr(i) = rscr_Sol;
     // Rscr_Redsh(i, 1) = redshift(remis, impact_par);
   }

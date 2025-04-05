@@ -34,7 +34,7 @@ def dSscInit(Rsc, dph):
 
         dSsc[:, i] = dph * (r2_**2 - r1_**2) / 2
 
-    return dSsc
+    return np.abs(dSsc)
 
 
 def InitArray(Nradi):

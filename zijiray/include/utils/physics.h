@@ -33,6 +33,11 @@ double Loren_dA_dr(double r, double rin,
                    const ziji::astro_objects::BlackHole &blackHoleObj);
 double RedshiftDisk_Disk(double re, double ro, double impact_par,
                          const ziji::astro_objects::BlackHole &blackHoleObj);
+
+double
+EmissionAngleDisk_Screen(double re, double k_th, double impact_par,
+                         const ziji::astro_objects::BlackHole &blackHoleObj);
+
 } // namespace relativity
 
 } // namespace physics

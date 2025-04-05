@@ -1,4 +1,5 @@
 
+
 double FuncRadiEm(double rscr, double *params) {
   double phscr = params[0];
   double rhit = params[1];
@@ -13,12 +14,21 @@ double FuncRadiEm(double rscr, double *params) {
   th_var = rayGen.vars[1];
   params[2] = rayGen.vars[0];
   params[3] = rayGen.impact_par;
+  params[4] = rayGen.vars[3];
 
-  // Bh change
-  if (r_var < black_hole.Horizon() + 1.0e-4)
-    return (r_var * fabs(sin(th_var)) - rhit) / rhit;
+  double horizon = black_hole.Horizon();
+  double tolr = 2.0 * 1.0e-7 * horizon;
+  double epsil = 1.e-7;
 
-  return (r_var - rhit) / rhit; // dr/rhit = (r-rhit)/rhit
+  // std::cout << "Radi: rem = " << r_var << "\n";
+
+  if (rscr > 0 && r_var > horizon + tolr) {
+
+    return (r_var - rhit) / rhit;
+
+  } else {
+    return NAN;
+  }
 }
 
 void RadiArray(int Nar, double *rArr, double rmax, double rmin) {
