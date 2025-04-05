@@ -17,7 +17,12 @@
 
 ## Project Overview
 
-`ziji` simulates the X-ray spectra of black hole X-ray binaries, incorporating the effects of returning radiation. It uses a disk+corona model, considering both thermal disk and reflection components. The model assumes a lamppost corona in Kerr spacetime and improves upon previous calculations by self-consistently determining the ionization parameter at each radial coordinate of the disk, resulting in more realistic reflection spectra (Mirzaev et al., 2024, [link](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b); Mirzaev et al., 2024, [link](https://arxiv.org/abs/2406.01226)).
+`ziji` simulates the X-ray spectra of black hole X-ray binaries, incorporating the effects of returning radiation. It uses a disk+corona model, considering both thermal disk and reflection components. The model assumes a lamppost corona in Kerr spacetime and improves upon previous calculations by self-consistently determining the ionization parameter at each radial coordinate of the disk, resulting in more realistic reflection spectra.
+
+References:    
+
+[1] _Toward More Accurate Synthetic Reflection Spectra: Improving the Calculations of Returning Radiation_, Mirzaev et al., [Astrophys.J. 965, 66 (2024)](https://iopscience.iop.org/article/10.3847/1538-4357/ad303b)    
+[2] _ZIJI: a model to calculate X-ray spectra of black hole X-ray binaries_, Mirzaev et al., [2406.01226](https://arxiv.org/abs/2406.01226).
 
 
 ## Features
@@ -77,7 +82,7 @@ pip3 install -r requirements.txt
    make cmake_clean
    chmod +x lib/reflector_linux
    ```
-
+*NOTE:* `ziji` requires a reflection model to work, place the binary of your reflection model in `lib` directory and replace `lib/reflector_linux` in the last command with yours.
 
 ## Usage
 
@@ -153,14 +158,10 @@ Here is an overview of the important directories and files in the project:
 
 ## Contributing
 
-Contributions are welcome!
-.......
-
-## License
-
-*(this section empty for now)*
+Contributions are welcome!    
 
 ## Acknowledgements
 
 *(this section empty for now)*
+
 
