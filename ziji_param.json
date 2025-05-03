@@ -1,0 +1,24 @@
+{
+    "black_hole": {
+        "spin": 0.998,
+        "mass": 10
+    },
+    "observer": {
+        "distance": 1.0e+06,
+        "inclination": 45
+    },
+    "accretion_disk": {
+        "iron_abundance": 1.0,
+        "density": 1.0e+22,
+        "ionization": 100.0,
+        "scale_luminosity": 0.005,
+        "color_factor": 1.7,
+        "ionization_profile": null
+    },
+    "corona": {
+        "gamma": 2.0,
+        "ecut": 300,
+        "height": 20,
+        "scale_luminosity": 0.005
+    }
+}
